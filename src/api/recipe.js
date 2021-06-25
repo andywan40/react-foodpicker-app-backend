@@ -26,23 +26,16 @@ router.get("/cuisine/:cuisine/:cont", async(req, res, next) => {
                 _cont: cont
             });
         }
-        //make a request to edamam
         
+        //make a request to edamam
         const {data} = await axios.get(`${BASE_URL}${params}`);
-
-        res.json({
-            params,
-            cuisine, 
-            cont,
-            data
-        });
         const nextLink = data._links.next.href.split("=")[2].split("&")[0];
         const returnData = {
             hits: data.hits,
             nextLink,
         }
         //respond to this request with data from edamam api
-        //res.json(returnData);
+        res.json(returnData);
         
     }catch(e){
         next(e);
