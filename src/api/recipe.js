@@ -28,7 +28,9 @@ router.get("/cuisine/:cuisine/:cont", async(req, res, next) => {
         }
         //make a request to edamam
         res.json({
-            params
+            params,
+            cuisine, 
+            cont
         });
         const {data} = await axios.get(`${BASE_URL}${params}`);
         const nextLink = data._links.next.href.split("=")[2].split("&")[0];
@@ -37,7 +39,7 @@ router.get("/cuisine/:cuisine/:cont", async(req, res, next) => {
             nextLink,
         }
         //respond to this request with data from edamam api
-        res.json(returnData);
+        //res.json(returnData);
         
     }catch(e){
         next(e);
